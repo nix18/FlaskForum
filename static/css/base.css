@@ -1,0 +1,24 @@
+
+.selectpicker{
+    margin-right: 20px;
+}
+
+.logo{
+     width: 50px;
+}
+
+body{
+    background: url("https://api.dujin.org/bing/1920.php") no-repeat center center fixed;
+}
+
+.main{
+    background: #fff;
+    width: 730px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px   ;
+}
+
+.page-title{
+    text-align: center;
+}

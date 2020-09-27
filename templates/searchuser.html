@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    搜索结果
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/tiezi.css') }}">
+{% endblock %}
+
+{% block main %}
+    <ul class="tiezi-list-group">
+        {% for user in users %}
+        <li>
+            <div class="tiezi-group">
+                <p class="tiezi-title"><a href="{{ url_for('personal', userid = user.userid) }}">{{ user.username }}</a></p>
+                <p class="tiezi-content"></p>
+                <div class="tiezi-info">
+                    <span class="tiezi-author"></span>
+                    <span class="tiezi-time"></span>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}

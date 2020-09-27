@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}-学生资源交流平台</title>
+
+
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        <img class = "logo" src="{{ url_for('static', filename='images/tou.png') }}" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('index') }}">首页 <span class="sr-only">(current)</span></a>
+            </li>
+              &nbsp;&nbsp;&nbsp;
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('fatie') }}">发帖</a>
+            </li>
+              &nbsp;&nbsp;&nbsp;
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">版块</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for block in blocks %}
+                    <a class="dropdown-item"  href="{{ url_for("forum",blockname=block.urlfor1,pid=1) }}">{{ block.blockname }}</a>
+                {% endfor %}
+                  <hr>
+              <div class="dropdown-item">
+                   <a class="dropdown-item" href="{{ url_for('admin') }}">管理员</a>
+              </div>
+              <div class="dropdown-item">
+                   <a class="dropdown-item" href="{{ url_for('addblock') }}">增加版块</a>
+              </div>
+
+
+                <!--
+                <a class="dropdown-item"  href="{{ url_for('xueshu', pid=1) }}">学术交流</a>
+                <a class="dropdown-item" href="{{ url_for('richang') }}">日常交流</a>
+
+                -->
+              </div>
+            </li>
+          </ul>
+
+
+          <form class="form-inline my-2 my-lg-0"  action="{{ url_for('search') }}" method="get">
+
+              <input name="q" type="search" class="form-control mr-sm-2" placeholder="请输入关键字">
+              <button type="submit" class="btn btn-outline-success my-2 my-sm-0">查找</button>
+          </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <ul class="navbar-nav">
+
+             {% if user %}
+                  <li> <a class="nav-link" href="{{ url_for('personal', userid=user.userid) }}">{{ user.username }}</a> </li>
+                  <li> <a class="nav-link" href="{{ url_for('logout') }}">注销</a> </li>
+             {% else %}
+                  <li> <a class="nav-link" href="{{ url_for('login') }}">登录</a> </li>
+                  <li> <a class="nav-link" href="{{ url_for('regist') }}">注册</a> </li>
+             {% endif %}
+
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+table.default table {
+
+     border-collapse: collapse;
+
+     font-family: Futura, Arial, sans-serif;
+
+     width: 500px;
+}
+
+table.default caption {
+
+     font-size: larger;
+
+     margin: 1em auto;
+
+}
+
+table.default th,td {
+
+     padding: .65em;
+
+}
+
+table.default th,td {
+
+    border-bottom: 1px solid #ddd;
+
+    border-top: 1px solid #ddd;
+
+    text-align: center;
+
+}
+
+.button {
+    background-color: #e7e7e7; /* Green */
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: "SimHei","Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu, serif;
+    font-weight:bold;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}

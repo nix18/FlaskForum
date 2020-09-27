@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ block.blockname }}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/tiezi.css') }}">
+{% endblock %}
+
+{% block main %}
+    <ul class="tiezi-list-group">
+        {% for tiezis in fatie %}
+        <li>
+            <div class="avatar-group">
+                <img src="{{ url_for('static',filename='images/tou.png') }}" alt="" class="avatar">
+            </div>
+
+            <div class="tiezi-group">
+                <p class="tiezi-title"><a href="{{ url_for('pl', zhutie_id=tiezis.zhutieid) }}">{{ tiezis.zhutietitle }}</a> &nbsp;[阅读权限：{{ tiezis.zhutielimit }}]</p>
+                <span class="upinfo">推荐数：（ {{ tiezis.zhutieup }} ）</span>
+                <p class="tiezi-content"></p>
+                <div class="tiezi-info">
+                    <a href="{{ url_for("personal", userid=tiezis.userid) }}"><span class="tiezi-author">{{ tiezis.author.username }}</span></a>
+                    <span class="tiezi-time">{{ tiezis.zhutieTime }}</span>
+                </div>
+            </div>
+            <div>
+                &nbsp;
+                <hr>
+            </div>
+        </li>
+        {% endfor %}
+        <div class="zpid-group">
+        {% for i in zpids %}
+                    <a href="{{ url_for("forum", blockname=block.urlfor1, pid=i) }}">{{ i }}&nbsp;</a>
+         {% endfor %}
+        </div>
+    </ul>
+{% endblock %}

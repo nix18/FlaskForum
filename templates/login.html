@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}登录{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_regist.css') }}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">登录</h3>
+    <form action="" method="POST">
+        <div class="form-container">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="手机号码" name="telephone" id="tel">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="密码" name="password" id="pw">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" onclick="check()">登录</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function check() {
+            var pw = document.getElementById("pw").value;
+            var tel = document.getElementById("tel").value;
+            if (tel.length == 0 || pw.length == 0){
+                alert("手机号密码不能为空！");
+            }
+        }
+        window.onload=function () {
+            var pws = {{ pws|tojson }}
+            if (pws){
+                alert("密码输入错误！")
+            }
+        }
+    </script>
+{% endblock %}

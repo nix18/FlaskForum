@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<table align="left" class="default">
+{% for i in b %}
+
+<tr>
+    {% for a in i %}
+
+    <td>
+        <table>
+            <tr>
+                {% if a!=" " %}
+
+                <td rowspan="2">
+                    &nbsp;
+                    <img src="{{ url_for('static', filename='images/forum.jpg') }}" width="50px" height="50px">
+                </td>
+                {% endif %}
+
+                <td>
+                    <a href="{{ a.urlfor }}">&nbsp;&nbsp;{{ a.blockname }}</a><br/>
+                </td>
+            </tr>
+            <tr>
+                {% if a!=" " %}
+                <td>
+                    &nbsp;主帖数: {{ a.tzscount }}<br/>
+                </td>
+                <td>
+                    总评论数: {{ a.plscount }}<br/>
+                </td>
+                {% endif %}
+                &nbsp;
+                &nbsp;&nbsp;
+            </tr>
+        </table>
+    </td>
+
+    {% endfor %}
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+html{
+    background: url("http://api.btstu.cn/sjbz/?lx=dongman") no-repeat center center fixed;
+    //https://api.dujin.org/bing/1920.php
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

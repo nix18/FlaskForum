@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}个人信息{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/table.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/tiezi.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/pl.css") }}">
+{% endblock %}
+
+{% block main %}
+    {% if users %}
+
+        <form name="form1">
+        <table align="center" class="default" >
+            <tr>
+                <td align="center">
+                    {% if users.touxiang == 0 %}
+                        <img src="{{ url_for('static', filename="images/tou.png") }}" width="50" height="50"><br/><br/>
+                        <b>{{ users.username }}</b><br/>
+                        <b><a href="{{ url_for("upload_file") }}">修改头像</a></b>
+                    {% else %}
+                        {% set imgurl="images/"+users.userid|string+".jpg" %}
+                        <img src="{{url_for('static', filename=imgurl)}}" width="50" height="50"><br/><br/>
+                        <b>{{ users.username }}</b><br/>
+                        <b><a href="{{ url_for("upload_file") }}">修改头像</a></b>
+                    {% endif %}
+
+                </td>
+                <td>
+                    <table align="center">
+                        <tr>
+                            <td rowspan="4" align="center">
+                                <b>个人信息</b>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;性别：
+                            </td>
+                            <td>
+                                {{ user.gender }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;年龄：
+                            </td>
+                            <td>
+                                {{ user.age }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;E-Mail：
+                            </td>
+                            <td>
+                                <a href="mailto:{{ users.email }}">{{ users.email }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;论坛等级：
+                            </td>
+                            <td>
+                                {{ users.userlimit }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                   <a href="{{ url_for('xiugai') }}"><input type="button" value="修改用户信息" style="float: right;" class="button button2"></a>
+               </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>主题</b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <table align="center" class="default">
+                        {% for tiezis in tiezis %}
+                            <tr>
+                                <td text-align="left">
+                                    <a href="{{ url_for('pl', zhutie_id=tiezis.zhutieid) }}">{{ tiezis.zhutietitle }}</a>
+                                </td>
+                                <td>
+                                    {{ tiezis.zhutieTime }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>评论</b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <ul class="pls-list">
+                        {% for pl in pls %}
+                            <div class="url-css">
+                                <span class="username"><a href="{{ url_for('pl', zhutie_id=pl.zhutieid) }}">前往该贴</a></span>
+                            </div>
+                            <div class="user-info">
+                                <span class="time">{{ pl.pingluntime }}</span>
+                            </div>
+                            <p class="pl-content">{{ pl.content }}</p>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        </form>
+    {% endif %}
+
+{% endblock %}

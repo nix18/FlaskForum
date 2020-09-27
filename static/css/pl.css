@@ -1,0 +1,42 @@
+.tiezi-info{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pls-list{
+    list-style: none;
+    border-bottom: 1px solid #eee;
+    padding-left: 0;
+}
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-info{
+    font-size: 16px;
+    color: #9b9b9b;
+    line-height: 40px;
+}
+
+.user-info .username{
+    margin-left: 15px;
+}
+
+.user-info .time{
+    float: right;
+}
+
+.pl-content{
+    margin-left: 60px;
+}
+
+.url-css{
+    float: left;
+}
+
+.upinfo{
+    text-align: right;
+}

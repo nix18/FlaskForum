@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}发布帖子{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fatie.css') }}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">发布帖子</h3>
+    <form action="" method="post">
+        <div class="form-container">
+            <div class="form-group">
+                <input type="text" placeholder="请输入标题" id="title" class="form-control" name="title">
+            </div>
+            <div class="form-group">
+                <textarea name="content" id="content" rows="6" placeholder="请输入主帖内容" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <table align="left">
+                    <tr>
+                        <td>
+                            <h6>选择发布板块：</h6>
+                        </td>
+                        <td class="td-sty">
+                             <select size="1" name="blockid" id="blockid">
+                                 {% for block in blocks %}
+                                    <option value={{ block.blockid }}>{{ block.blockname }}</option>
+                                 {% endfor %}
+                             </select>
+                        </td>
+                        <td>
+                            <h5 class="td-sty">阅读权限：</h5>
+                        </td>
+                        <td>
+                            <select size="1" name="zhutielimit" id="limit">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <button class="btn btn-primary" onclick="check()">发布帖子</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function check() {
+                var title = document.getElementById("title").value;
+                var content = document.getElementById("content").value;
+                if (title.length == 0 || content.length == 0){
+                    alert("标题与内容不能为空！")
+                }
+            }
+    </script>
+{% endblock %}

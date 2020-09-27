@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}帖子信息{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pl.css') }}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">{{ zhutie.zhutietitle }}</h3>
+    <p class="tiezi-info" >
+        <span>作者：{{ zhutie.author.username }}</span>
+        <span>时间：{{ zhutie.zhutieTime }}</span>
+    </p>
+    <hr>
+    <p class="tiezi-content">{{ zhutie.zhutievalue }}</p>
+    <hr>
+    <br>
+    <span class="upinfo"><a href="{{ url_for('tieziup',zhutieid=zhutie.zhutieid) }}"> 推荐 </a>（ {{ zhutie.zhutieup }} ）</span>
+    <br>
+    <hr>
+    {% if plcount %}
+    <h4>评论: ({{ plcount }})</h4>
+    {% endif %}
+    <form action="{{ url_for('addpl') }}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="评论在此填写" name="pl-content">
+            <input type="hidden" name="zhutie_id" value="{{ zhutie.zhutieid }}">
+        </div>
+        <div class="form-group" style="text-align: right">
+            <button class="btn btn-primary">发送评论</button>
+        </div>
+    </form>
+    <ul class="pls-list">
+        {% for pls in zhutie.pls %}
+            <li>
+                <div class="user-info">
+                    {% if users.touxiang == 0 %}
+                        <img src="{{ url_for('static', filename="images/tou.png") }}" width="50" height="50">
+                    {% else %}
+                        {% set imgurl="images/"+users.userid|string+".jpg" %}
+                        <img src="{{url_for('static', filename=imgurl)}}" width="50" height="50" class="avatar">
+                    {% endif %}
+                    <span class="username"><a href="{{ url_for('personal', userid=pls.author.userid) }}">{{ pls.author.username }}</a></span>
+                    <span class="time">{{ pls.pingluntime }}</span>
+                    <span><a href="{{ url_for('plup',pl_id=pls.id,zt_id=pls.zhutieid) }}"> 赞 </a>（ {{ pls.pinglunup }} ）</span>
+                    <span><a href="{{ url_for('pldown',pl_id=pls.id,zt_id=pls.zhutieid) }}"> 踩 </a>（ {{ pls.pinglundown }} )</span>
+                </div>
+                <p class="pl-content">{{ pls.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

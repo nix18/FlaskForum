@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}个人信息{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/table.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/tiezi.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/pl.css") }}">
+{% endblock %}
+{% block main %}
+
+
+        <form name="form1">
+        <table align="center" class="default" >
+            <tr>
+                <tr>修改：<input type="search" name="q1"  placeholder="输入用户id"/>
+                &nbsp;
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">查找</button>
+
+            {% if users %}
+                <td align="center">
+                    {% if users.touxiang == 0 %}
+                        <img src="{{ url_for('static', filename="images/tou.png") }}" width="50" height="50"><br/><br/>
+                        <b>{{ users.username }}</b><br/>
+                        <b><a href="{{ url_for("upload_file") }}">修改头像</a></b>
+                    {% else %}
+                        {% set imgurl="images/"+users.userid|string+".jpg" %}
+                        <img src="{{url_for('static', filename=imgurl)}}" width="50" height="50"><br/><br/>
+                        <b>{{ users.username }}</b><br/>
+                        <b><a href="{{ url_for("upload_file") }}">修改头像</a></b>
+                    {% endif %}
+                </td>
+                <td>
+                    <table align="center">
+                        <tr>
+                            <td rowspan="4" align="center">
+                                <b>个人信息</b>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;性别：
+                            </td>
+                            <td>
+                                {{ users.gender }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;年龄：
+                            </td>
+                            <td>
+                                {{ users.age }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;E-Mail：
+                            </td>
+                            <td>
+                                <a href="mailto:{{ users.email }}">{{ users.email }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;论坛等级：
+                            </td>
+                            <td>
+                                {{ users.userlimit }}
+
+
+
+                            </td>
+                        </tr>
+                    </table>
+
+            </tr>
+                 <tr>
+               <td colspan="2">
+                    <a href="{{ url_for('adminxiugai', userid=users.userid) }}"><input type="button" value="修改用户信息" style="float: right;" class="button button2"></a>
+               </td>
+            </tr>
+                </td>
+            </tr>
+        <tr>
+                <td colspan="2">
+                    <b>主题</b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <table align="center" class="default">
+                        {% for tiezis in tiezis %}
+                            <tr>
+                                <td text-align="left">
+                                    <a href="{{ url_for('pl', zhutie_id=tiezis.zhutieid) }}">{{ tiezis.zhutietitle }}</a>
+                                </td>
+                                <td>
+                                    {{ tiezis.zhutieTime }}
+                                    <a href="{{ url_for('delete', tieziid=tiezis.zhutieid) }}"><input type="button"  value="删除" onclick="getValue()"/></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <b>评论</b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <ul class="pls-list">
+                        {% for pl in pls %}
+                            <li>
+                                <div class="url-css">
+                                    <span class="username"><a href="{{ url_for('pl', zhutie_id=pl.zhutieid) }}">前往该贴</a> <a href="{{ url_for('deletepl', plid=pl.id) }}">删除评论</a></span>
+                                </div>
+                                <div class="user-info">
+                                    <span class="time">{{ pl.pingluntime }}</span>
+                                </div>
+                                <p class="pl-content">{{ pl.content }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        </form>
+        <script language="javascript">
+    function getValue()
+    {
+        var v = document.getElementById("username");
+        alert(v.value);
+    }
+ </script>
+    {% endif %}
+
+{% endblock %}
