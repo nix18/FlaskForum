@@ -16,6 +16,6 @@
      6、运行app.py
  
 # License
-[Apache License 2.0](https://raw.githubusercontent.com/nix18/ShortUrl-SSM/master/LICENSE)
+[Apache License 2.0](https://raw.githubusercontent.com/nix18/FlaskForum/master/LICENSE)
 # 作者博客
 [MoeCola.com](https://moecola.com)
